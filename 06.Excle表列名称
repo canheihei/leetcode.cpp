@@ -1,0 +1,26 @@
+class Solution 
+{
+public:
+    char ch[27]={'0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    string convertToTitle(int columnNumber) 
+    {
+        int dividend = columnNumber;
+        vector<char> tmpRst;
+        while(dividend > 0)
+        {
+            int remainder = dividend%26;
+            if(remainder == 0)  // a_0 == 26
+            {
+                tmpRst.push_back('Z');
+                dividend -= 26;
+                dividend /=26;
+            }
+            else
+            {
+                tmpRst.push_back('A' + remainder-1);
+                dividend /= 26;
+            }
+        }
+        return string(tmpRst.rbegin(), tmpRst.rend());
+    }
+};

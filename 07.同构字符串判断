@@ -1,0 +1,30 @@
+class Solution 
+{
+public:
+    bool isIsomorphic(string s, string t) 
+    {
+        if (s.size() != t.size())
+        {
+            return false;
+        } 
+
+        unordered_map<char, char> sMap; // 用于存储s中字符的映射关系
+        unordered_map<char, char> tMap; // 用于存储t中字符的映射关系
+
+        for (size_t i = 0; i < s.size(); ++i)
+        {
+            // 检查s[i]和t[i]在两个映射表中的映射关系
+            if ((sMap.find(s[i]) != sMap.end() && sMap[s[i]] != t[i]) ||
+                (tMap.find(t[i]) != tMap.end() && tMap[t[i]] != s[i]))
+            {
+                return false;
+            }
+
+            // 建立s[i]和t[i]的映射关系
+            sMap[s[i]] = t[i];
+            tMap[t[i]] = s[i];
+        }
+
+        return true;
+    }
+};

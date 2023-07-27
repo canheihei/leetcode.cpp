@@ -1,0 +1,23 @@
+class Solution 
+{
+public:
+    string reverseStr(string s, int k) 
+    {
+        int size=s.size();
+        int pos=0;
+        while(size-pos>=2*k)
+        {
+            reverse(s.begin()+pos,s.begin()+pos+k);
+            pos+=2*k;
+        }
+        if(size-pos<k)
+        {
+            reverse(s.begin()+pos,s.end());
+        }
+        if(size-pos>=k&&size-pos<2*k)
+        {
+            reverse(s.begin()+pos,s.begin()+pos+k);
+        }
+        return s;
+    }
+};

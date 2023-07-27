@@ -1,0 +1,23 @@
+class Solution 
+{
+public:
+    string reverseWords(string s) 
+    {
+        int pos=0;
+        int pre=0;
+        while(pos<s.size())
+        {
+            while(s[pos]!=' '&&pos<s.size())
+            {
+                ++pos;
+            }
+            reverse(s.begin()+pre,s.begin()+pos);
+            while(s[pos]==' '&&pos<s.size())
+            {
+                ++pos;
+            }
+            pre=pos;
+        }
+        return s;
+    }
+};

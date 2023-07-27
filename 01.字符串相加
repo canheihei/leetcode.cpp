@@ -1,33 +1,52 @@
 class Solution 
 {
 public:
-    std::string addStrings(string num1, string num2) 
+    string addStrings(string num1, string num2) 
     {
-        int p1 = num1.length() - 1;
-        int p2 = num2.length() - 1;
-        int carry = 0;
-        string result;
-        
-        while (p1 >= 0 || p2 >= 0) 
+        int end1=num1.size()-1;
+        int end2=num2.size()-1;
+        int val1=0,val2=0;
+        int carry=0;
+        int sum=0;
+        string ans;
+        while(end1>=0||end2>=0)
         {
-            int digit1 = (p1 >= 0) ? num1[p1] - '0' : 0;
-            int digit2 = (p2 >= 0) ? num2[p2] - '0' : 0;
-            int sum = digit1 + digit2 + carry;
-            
-            carry = sum / 10;
-            int digitSum = sum % 10;
-            
-            result.insert(result.begin(), digitSum + '0');
-            
-            p1--;
-            p2--;
+            if(end1>=0)
+            {
+                val1=num1[end1]-'0';
+            }
+            else
+            {
+                val1=0;
+            }
+            if(end2>=0)
+            {
+                val2=num2[end2]-'0';
+            }
+            else
+            {
+                val2=0;
+            }
+
+            sum=val1+val2+carry;
+            if(sum>=10)
+            {
+                carry=1;
+                sum-=10;
+            }
+            else
+            {
+                carry=0;
+            }
+            ans+=(sum+'0');
+            --end1;
+            --end2;
         }
-        
-        if (carry != 0) 
+        if(carry==1)
         {
-            result.insert(result.begin(), carry + '0');
+            ans+='1';
         }
-        
-        return result;
+        reverse(ans.begin(),ans.end());
+        return ans;
     }
 };

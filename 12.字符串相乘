@@ -1,0 +1,28 @@
+string multiply(string num1, string num2) {
+    if (num1 == "0" || num2 == "0") {
+        return "0";
+    }
+    string ret("0");
+    int n1 = num1.size();
+    int n2 = num2.size();
+    for (int i = n1 - 1; i >= 0; --i) {
+        string curr;
+        int carry = 0;
+        for (int j = n2 - 1; j >= 0; --j) {
+            int val1 = num1[i] - '0';
+            int val2 = num2[j] - '0';
+            int product = val1 * val2 + carry;
+            carry = product / 10;
+            curr += (product % 10 + '0');
+        }
+        if (carry > 0) {
+            curr += (carry + '0');
+        }
+        reverse(curr.begin(), curr.end());
+        for (int k = 0; k < n1 - 1 - i; ++k) {
+            curr += '0';
+        }
+        ret = addStrings(ret, curr);
+    }
+    return ret;
+}

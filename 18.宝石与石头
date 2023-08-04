@@ -1,0 +1,21 @@
+class Solution 
+{
+public:
+    int numJewelsInStones(string jewels, string stones) 
+    {
+        size_t jsize=jewels.size();
+        size_t ssize=stones.size();
+        int sum=0;
+        for(size_t i=0;i<jsize;++i)
+        {
+            for(size_t j=0;j<ssize;++j)
+            {
+                if(stones[j]==jewels[i])
+                {
+                    ++sum;
+                }
+            }
+        }
+        return sum;
+    }
+};

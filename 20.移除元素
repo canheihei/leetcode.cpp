@@ -1,0 +1,45 @@
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        if(nums.empty())
+        {
+            return nums.size();
+        }
+
+        int i=0;
+        int len = nums.size();//size 返回的是元素的数量，要得到vector容器的最后一位下标需要-1
+        for(;i<len;++i)
+        {
+            if(val == nums[i]) //找到目标元素
+            {
+                //报越界异常
+                // for(int j=i;j<len;++j) //把后面的陆续覆盖前面的 长度减一
+                // {
+                //     nums[j]=nums[j+1];
+                // }
+                
+                //ac  这里是因为j<len-1 顶住了越界问题
+                //比如说len等于10 len-1等于9  j<9 那么j最大可以是8 而数组最大的下标为9 
+                // num[j+1]等于num[9] 所以不会越界
+                // for(int j=i;j<len-1;++j) //把后面的陆续覆盖前面的 长度减一
+                // {
+                //     nums[j]=nums[j+1];
+                // }
+
+                //ac   假如len等于10 j最大等于9 所以不会溢出 推荐这种写法
+                for(int j=i+1;j<len;++j) //把后面的陆续覆盖前面的 长度减一
+                {
+                    nums[j-1]=nums[j];
+                }
+
+
+                --i;//?为什么要--i?
+                // 需要--i是因为移除val所匹配的元素之后，后面的元素覆盖了前面的元素，此时i所指的元素是一个新元素，假如不--i的话，最外层的for循环会++i，这就会导致跳过一个元素
+                --len;
+            }
+
+        }
+        return len;
+    }
+};

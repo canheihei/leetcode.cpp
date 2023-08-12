@@ -1,33 +1,35 @@
+思路：创建两个栈，一个用来插入删除，一个用来提取最小值。
 class MinStack 
 {
-    stack<int> x_stack;
-    stack<int> min_stack;
+    stack<int> _st;    //用来支持正常插入删除的栈
+    stack<int> _minst;       //用来得到最小值的栈
 public:
     MinStack() 
     {
-        min_stack.push(INT_MAX);
     }
     
     void push(int x) 
     {
-        x_stack.push(x);
-        min_stack.push(min(min_stack.top(), x));
+        if(_minst.empty()||_minst.top()>x)    //得到最小值的栈中如果为空或其栈顶元素大于即将插入元素时，入栈。
+        {
+            _minst.push_back(x);   
+        }
     }
     
     void pop() 
     {
-        x_stack.pop();
-        min_stack.pop();
+        x_stack.pop();    //对于负责正常出入的栈，正常操作即可
+        min_stack.pop();    //如果删除时，遇到了最小栈里面相同的栈顶元素，要一同删除，保证最小元素的更新
     }
     
     int top() 
     {
-        return x_stack.top();
+        return x_stack.top();    //对于负责正常出入的栈，正常操作即可
     }
     
     int getMin() 
     {
-        return min_stack.top();
+        return min_stack.top();    //最小栈栈顶元素即为实时的最小值
     }
 };
 

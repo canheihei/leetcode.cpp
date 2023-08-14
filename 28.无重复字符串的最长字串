@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int prev = 0;
+        int cur = 0;
+        int ch[256] = {0};
+        int length = 0;
+        while (cur != s.size()) {
+            while (cur < s.size() && ch[s[cur]] < 1) {
+                ++ch[s[cur]];
+                ++cur;
+            }
+            if (length < cur - prev) {
+                length = cur - prev;
+            }
+            ++prev;
+            cur=prev;
+            for (int i = 0; i < 256; ++i) {
+                ch[i] = 0;
+            }
+        }
+        return length;
+    }
+};

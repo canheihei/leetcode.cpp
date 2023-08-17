@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        stack <int> s;//建栈
+        for(auto x:digits)//遍历入栈
+        {
+            s.push(x);
+        }
+        int g=1;
+        vector<int>ans;//答案数组
+        while(!s.empty())
+        {
+            g+=s.top();//取栈顶+进位
+            s.pop();//出栈
+            ans.insert(ans.begin(),g%10);//前插
+            g/=10;
+        }
+        if(g==1)//有进位
+        ans.insert(ans.begin(),1);
+        return ans;
+    }
+};
+
